@@ -12,7 +12,7 @@ type Writer struct {
 	fields map[string]interface{}
 }
 
-func NewWriter(w io.Writer, f map[string]interface{}) Writer {
+func New(w io.Writer, f map[string]interface{}) Writer {
 	return Writer{
 		w:      w,
 		fields: f,
@@ -29,5 +29,5 @@ func (w Writer) Write(p []byte) (n int, err error) {
 		event[k] = v
 	}
 
-	return len(p), json.NewEncoder(w.w).Encode(e)
+	return len(p), json.NewEncoder(w.w).Encode(event)
 }
